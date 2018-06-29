@@ -1,0 +1,20 @@
+﻿@model Browse
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+@Model.Name
+@Model.PriceAfterSale,-
+@Model.OriginPrice.-
+
+<img src="@Model.Image" alt="" height="420" width="420">
+
+@Model.ValidFrom
+
+<a href="@Model.LinkFirm">link text</a>
+
+@Model.Description
+
+
+<a asp-controller="Catalog" asp-action="Item" asp-route-id="@Model.Id" class="btn btn-round btn-white">Produkt</a>
