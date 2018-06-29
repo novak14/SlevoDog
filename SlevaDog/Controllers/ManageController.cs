@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using SlevaDog.Models;
-using SlevaDog.Models.ManageViewModels;
-using SlevaDog.Services;
+using SlevoDog.Models;
+using SlevoDog.Models.ManageViewModels;
+using SlevoDog.Services;
 
-namespace SlevaDog.Controllers
+namespace SlevoDog.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
@@ -522,7 +522,7 @@ namespace SlevaDog.Controllers
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("SlevaDog"),
+                _urlEncoder.Encode("SlevoDog"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

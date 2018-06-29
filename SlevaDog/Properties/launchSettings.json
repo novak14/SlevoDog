@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "SlevaDog": {
+    "SlevoDog": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

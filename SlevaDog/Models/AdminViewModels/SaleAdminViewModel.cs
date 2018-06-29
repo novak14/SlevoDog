@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SlevoDog.Models.CatalogViewModels
+namespace SlevaDog.Models.AdminViewModels
 {
-    public class Sale
+    public class SaleAdminViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -13,12 +14,14 @@ namespace SlevoDog.Models.CatalogViewModels
         public decimal AveragePrice { get; set; }
         public decimal OriginPrice { get; set; }
         public string Image { get; set; }
+
+        [Display(Name = "Release Date"), DataType(DataType.DateTime)]
         public DateTime DateInsert { get; set; }
+
         public DateTime ValidFrom { get; set; }
         public DateTime ValidTo { get; set; }
         public string LinkFirm { get; set; }
         public string Description { get; set; }
-
-        public decimal ProcentSale => Math.Round(100 - (PriceAfterSale * 100 / OriginPrice));
+        public bool Disabled { get; set; }
     }
 }

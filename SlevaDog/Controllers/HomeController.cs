@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SlevaDog.Models;
+using SlevoDog.Models;
 
-namespace SlevaDog.Controllers
+namespace SlevoDog.Controllers
 {
     public class HomeController : Controller
     {

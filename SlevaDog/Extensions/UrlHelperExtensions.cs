@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SlevaDog.Controllers;
+using SlevoDog.Controllers;
 
 namespace Microsoft.AspNetCore.Mvc
 {

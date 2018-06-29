@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SlevaDog.Models.AccountViewModels
+namespace SlevoDog.Models.AccountViewModels
 {
     public class LoginWithRecoveryCodeViewModel
     {

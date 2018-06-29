@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SlevaDog.Models;
+using SlevoDog.Models;
 
-namespace SlevaDog.Data
+namespace SlevoDog.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

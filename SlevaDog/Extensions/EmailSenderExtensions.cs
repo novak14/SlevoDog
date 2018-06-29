@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using SlevaDog.Services;
+using SlevoDog.Services;
 
-namespace SlevaDog.Services
+namespace SlevoDog.Services
 {
     public static class EmailSenderExtensions
     {

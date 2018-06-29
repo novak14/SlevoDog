@@ -1,6 +1,6 @@
 using System;
 
-namespace SlevaDog.Models
+namespace SlevoDog.Models
 {
     public class ErrorViewModel
     {

@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SlevaDog.Data;
-using SlevaDog.Models;
-using SlevaDog.Services;
+using SlevoDog.Data;
+using SlevoDog.Models;
+using SlevoDog.Services;
 
-namespace SlevaDog
+namespace SlevoDog
 {
     public class Startup
     {
@@ -26,7 +26,7 @@ namespace SlevaDog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOptions();
+          //  services.AddOptions();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -36,7 +36,9 @@ namespace SlevaDog
                 .AddDefaultTokenProviders();
 
             // Add application services.
-            services.AddModuleCatalog(o => o.connectionString = Configuration.GetSection("ConnectionStrings:SlevaDog.Module.CatalogConnection").Value);
+            services.AddModuleCatalog(o => o.connectionString = Configuration.GetSection("ConnectionStrings:SlevoDog.Module.CatalogConnection").Value);
+
+            services.AddModuleAdmin(o => o.connectionString = Configuration.GetSection("ConnectionStrings:SlevoDog.Module.CatalogConnection").Value);
 
             services.AddTransient<IEmailSender, EmailSender>();
 

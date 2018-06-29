@@ -1,12 +1,12 @@
 ﻿using Catalog.Business;
 using Microsoft.AspNetCore.Mvc;
-using SlevaDog.Models.CatalogViewModels;
+using SlevoDog.Models.CatalogViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SlevaDog.Controllers
+namespace SlevoDog.Controllers
 {
     public class CatalogController : Controller
     {
