@@ -1,10 +1,30 @@
-﻿@model Browse
+﻿@model Sale
 @{
     ViewData["Title"] = "Index";
 }
 
 <h2>Index</h2>
-@Model.Name
+
+@foreach (var item in Model.saleCollection.collections)
+{
+<div>
+    @item.Name
+    @item.PriceAfterSale,-
+    @item.OriginPrice.-
+
+    <img src="@item.Image" alt="" height="420" width="420">
+
+    @item.ValidFrom
+
+    <a href="@item.LinkFirm">link text</a>
+
+    @item.Description
+
+
+    <a asp-controller="Catalog" asp-action="Item" asp-route-id="@item.Id" class="btn btn-round btn-white">Produkt</a>
+</div>
+    }
+@*@Model.Name
 @Model.PriceAfterSale,-
 @Model.OriginPrice.-
 
@@ -17,4 +37,4 @@
 @Model.Description
 
 
-<a asp-controller="Catalog" asp-action="Item" asp-route-id="@Model.Id" class="btn btn-round btn-white">Produkt</a>
+<a asp-controller="Catalog" asp-action="Item" asp-route-id="@Model.Id" class="btn btn-round btn-white">Produkt</a>*@

@@ -19,20 +19,27 @@ namespace SlevoDog.Controllers
 
         public IActionResult Index()
         {
-            var test = _catalogService.LoadAll().FirstOrDefault();
+            var test = _catalogService.LoadAll();
 
-            Browse browse = new Browse
+            Sale sale = new Sale();
+
+            foreach (var item in test)
             {
-                Id = test.Id,
-                Name = test.Name,
-                PriceAfterSale = test.PriceAfterSale,
-                OriginPrice = test.OriginPrice,
-                Image = test.Image,
-                ValidFrom = test.ValidFrom,
-                LinkFirm = test.LinkFirm,
-                Description = test.Description
-            };
-            return View(browse);
+                Sale saleItem = new Sale
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    PriceAfterSale = item.PriceAfterSale,
+                    OriginPrice = item.OriginPrice,
+                    Image = item.Image,
+                    ValidFrom = item.ValidFrom,
+                    LinkFirm = item.LinkFirm,
+                    Description = item.Description
+                };
+
+                sale.saleCollection.collections.Add(saleItem);
+            }
+            return View(sale);
         }
 
         public IActionResult Item(int? id)

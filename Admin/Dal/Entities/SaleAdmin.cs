@@ -15,10 +15,34 @@ namespace Admin.Dal.Entities
 
         public DateTime DateInsert { get; set; }
 
-        public DateTime ValidFrom { get; set; }
-        public DateTime ValidTo { get; set; }
+        private DateTime? _validFrom;
+        public DateTime? ValidFrom {
+            get => _validFrom;
+            set
+            {
+                if (value <= DateTime.MinValue)
+                    _validFrom = null;
+                else
+                    _validFrom = value;
+            }
+        }
+
+        private DateTime? _validTo;
+        public DateTime? ValidTo {
+            get => _validTo;
+            set
+            {
+                if (value <= DateTime.MinValue)
+                    _validTo = null;
+                else
+                    _validTo = value;
+            }
+        }
         public string LinkFirm { get; set; }
         public string Description { get; set; }
         public bool Disabled { get; set; }
+
+        public decimal PercentSale => Math.Round(100 - (PriceAfterSale * 100 / OriginPrice));
+
     }
 }

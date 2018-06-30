@@ -1,5 +1,7 @@
 ﻿using Admin.Business;
 using Admin.Configuration;
+using Admin.Dal.Repository.Abstraction;
+using Admin.Dal.Repository.Implementation;
 using System;
 
 
@@ -32,7 +34,7 @@ namespace Microsoft.Extensions.DependencyInjection
             //connectionString si vezme sam DbContext z IOptions<>
 
             //REPOSITORY
-            //services.AddScoped<ISaleRepository, SaleRepository>();
+            services.AddScoped<IInsertAdminRepository, InsertAdminRepository>();
 
 
             //SERVICES - zapouzdreni vsechn repositories pod jeden objekt

@@ -1,5 +1,7 @@
 ﻿using Admin.Business;
 using Admin.Dal.Entities;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SlevaDog.Models.AdminViewModels;
 using System;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace SlevoDog.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly AdminService _adminService;
@@ -25,24 +28,13 @@ namespace SlevoDog.Controllers
         [HttpPost]
         public IActionResult InsertItem(SaleAdminViewModel saleAdminViewModel, bool? bDisabled)
         {
-            SaleAdmin test = new SaleAdmin
+            if (ModelState.IsValid)
             {
-                AveragePrice = saleAdminViewModel.AveragePrice,
-                DateInsert = saleAdminViewModel.DateInsert,
-                Description = saleAdminViewModel.Description,
-                Disabled = saleAdminViewModel.Disabled,
-                Image = saleAdminViewModel.Image,
-                LinkFirm = saleAdminViewModel.LinkFirm,
-                Name = saleAdminViewModel.Name,
-                OriginPrice = saleAdminViewModel.OriginPrice,
-                PriceAfterSale = saleAdminViewModel.PriceAfterSale,
-                ValidFrom = saleAdminViewModel.ValidFrom,
-                ValidTo = saleAdminViewModel.ValidTo
-            };
-            _adminService.InsertSale(test);
+                SaleAdmin saleAdmin = Mapper.Map<SaleAdmin>(saleAdminViewModel);
 
-            //_adminService.InsertSale(saleAdminViewModel.AveragePrice, saleAdminViewModel.DateInsert, saleAdminViewModel.Description, saleAdminViewModel.Disabled,
-            //                         saleAdminViewModel.Image, saleAdminViewModel.LinkFirm, saleAdminViewModel.Name, saleAdminViewModel.);
+                _adminService.InsertSale(saleAdmin);
+            }
+
             return View("Index");
         }
     }

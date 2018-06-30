@@ -7,46 +7,52 @@
 <h2>Index</h2>
 
 <form asp-controller="Admin" asp-action="InsertItem" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="Name"></label>
         <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Image"></label>
         <input asp-for="Image" class="form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="LinkFirm"></label>
         <input asp-for="LinkFirm" class="form-control" />
+        <span asp-validation-for="LinkFirm" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Description"></label>
         <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="PriceAfterSale"></label>
         <input asp-for="PriceAfterSale" class="form-control" />
+        <span asp-validation-for="PriceAfterSale" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="AveragePrice"></label>
         <input asp-for="AveragePrice" class="form-control" />
+        <span asp-validation-for="AveragePrice" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="OriginPrice"></label>
         <input asp-for="OriginPrice" class="form-control" />
+        <span asp-validation-for="OriginPrice" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="DateInsert"></label>
-        <input type="date" asp-for="DateInsert" class="form-control" />
-    </div>
-    <div class="form-group">
         <label asp-for="ValidFrom"></label>
         <input type="datetime-local" asp-for="ValidFrom" class="form-control" />
+        <span asp-validation-for="ValidFrom" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="ValidTo"></label>
         <input type="date" asp-for="ValidTo" class="form-control" />
+        <span asp-validation-for="ValidTo" class="text-danger"></span>
     </div>
 
     <div class="checkbox">
@@ -56,8 +62,6 @@
         </label>
         <br />
     </div>
-
-
 
     <button type="submit" value="Submit">Odeslat</button>
 </form>

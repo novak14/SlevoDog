@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using SlevoDog.Data;
 using SlevoDog.Models;
 using SlevoDog.Services;
+using AutoMapper;
+using SlevaDog.Models.AdminViewModels;
+using Admin.Dal.Entities;
 
 namespace SlevoDog
 {
@@ -36,6 +39,8 @@ namespace SlevoDog
                 .AddDefaultTokenProviders();
 
             // Add application services.
+            Mapper.Initialize(cfg => cfg.CreateMap<SaleAdminViewModel, SaleAdmin>());
+
             services.AddModuleCatalog(o => o.connectionString = Configuration.GetSection("ConnectionStrings:SlevoDog.Module.CatalogConnection").Value);
 
             services.AddModuleAdmin(o => o.connectionString = Configuration.GetSection("ConnectionStrings:SlevoDog.Module.CatalogConnection").Value);

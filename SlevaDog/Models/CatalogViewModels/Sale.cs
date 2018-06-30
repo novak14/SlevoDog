@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SlevaDog.Models.CatalogViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,5 +21,8 @@ namespace SlevoDog.Models.CatalogViewModels
         public string Description { get; set; }
 
         public decimal ProcentSale => Math.Round(100 - (PriceAfterSale * 100 / OriginPrice));
+
+        public SaleCollection saleCollection { get; } = new SaleCollection();
+        //SaleCollection saleCollection = new SaleCollection()
     }
 }
