@@ -1,4 +1,6 @@
-﻿using Catalog.Dal.Entities;
+﻿using AutoMapper;
+using Catalog.Business.DTOObjects;
+using Catalog.Dal.Entities;
 using Catalog.Dal.Repository.Abstraction;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace Catalog.Business
 
         public List<Sale> LoadAll()
         {
+            var test = _loadCatalog.LoadAll();
             return _loadCatalog.LoadAll();
         }
 

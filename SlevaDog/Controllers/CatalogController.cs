@@ -32,9 +32,8 @@ namespace SlevoDog.Controllers
                     PriceAfterSale = item.PriceAfterSale,
                     OriginPrice = item.OriginPrice,
                     Image = item.Image,
-                    ValidFrom = item.ValidFrom,
                     LinkFirm = item.LinkFirm,
-                    Description = item.Description
+                    PercentSale = item.PercentSale
                 };
 
                 sale.saleCollection.collections.Add(saleItem);

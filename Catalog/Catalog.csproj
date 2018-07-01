@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Business\" />
     <Folder Include="Dal\Entities\" />
   </ItemGroup>
 

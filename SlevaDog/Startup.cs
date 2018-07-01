@@ -14,6 +14,8 @@ using SlevoDog.Services;
 using AutoMapper;
 using SlevaDog.Models.AdminViewModels;
 using Admin.Dal.Entities;
+using Catalog.Dal.Entities;
+using Catalog.Business.DTOObjects;
 
 namespace SlevoDog
 {

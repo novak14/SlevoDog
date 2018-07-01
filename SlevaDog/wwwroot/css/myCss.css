@@ -1,0 +1,29 @@
+﻿.containerItem {
+    border: 1px solid #abb0ba4d;
+    background-color: white;
+    border-radius: 25px;
+    min-height: 400px;
+    /*min-width: 400px;*/
+    margin-bottom: 3.66%;
+    float: left;
+    box-shadow: 0px 0px 20px -2px rgba(145,148,179,1);
+}
+
+.priceSale {
+    font-size: 2.25rem;
+    font-weight: 900;
+}
+
+.paddingBuyButtonCatalog {
+    margin-top: 1%;
+}
+
+.imageCatalog {
+    max-width: 100%;
+    height: 190px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}

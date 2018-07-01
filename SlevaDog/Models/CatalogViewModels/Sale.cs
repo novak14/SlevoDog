@@ -20,7 +20,7 @@ namespace SlevoDog.Models.CatalogViewModels
         public string LinkFirm { get; set; }
         public string Description { get; set; }
 
-        public decimal ProcentSale => Math.Round(100 - (PriceAfterSale * 100 / OriginPrice));
+        public int PercentSale { get; set; }
 
         public SaleCollection saleCollection { get; } = new SaleCollection();
         //SaleCollection saleCollection = new SaleCollection()

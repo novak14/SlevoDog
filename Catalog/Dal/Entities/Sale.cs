@@ -20,10 +20,6 @@ namespace Catalog.Dal.Entities
         public string LinkFirm { get; set; }
         public string Description { get; set; }
         public bool bDisabled { get; set; }
-
-        public decimal ProcentSale
-        {
-            get { return OriginPrice - (PriceAfterSale * 100 / 120); }
-        }
+        public int PercentSale { get; set; }
     }
 }
