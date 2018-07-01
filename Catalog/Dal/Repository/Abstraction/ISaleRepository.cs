@@ -7,7 +7,7 @@ namespace Catalog.Dal.Repository.Abstraction
 {
     public interface ISaleRepository
     {
-        List<Sale> LoadAll();
+        IEnumerable<Sale> LoadAll();
         Sale LoadById(int id);
     }
 }

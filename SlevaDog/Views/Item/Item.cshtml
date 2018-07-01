@@ -1,0 +1,44 @@
+﻿@model Sale
+
+@{
+    ViewData["Title"] = "Item";
+}
+
+<h2>Item</h2>
+<div>
+    <div>
+        @Model.Name
+    </div>
+
+    <div>
+        @Model.PriceAfterSale,-
+    </div>
+    <div>
+        @Model.OriginPrice.-
+    </div>
+
+    <div>
+        <img src="@Model.Image" alt="" height="420" width="420">
+    </div>
+
+    <div>
+        @Model.ValidFrom
+    </div>
+
+    <div>
+        @Model.ValidTo
+    </div>
+
+    <div>
+        <a href="@Model.LinkFirm">link text</a>
+    </div>
+    <div>
+        @Model.Description
+    </div>
+    <div>
+        @Model.PercentSale%
+    </div>
+    <div>
+        @Model.DateInsert
+    </div>
+</div>

@@ -4,6 +4,9 @@
 }
 
 <h2>Index</h2>
+<a asp-action="Index" asp-route-sortOrder="@ViewData["SaleSortParm"]">Od nejvetsi slevy</a>
+<a asp-action="Index" asp-route-sortOrder="@ViewData["NewSortParm"]">Od nejnovejsiho</a>
+<a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">Od nejlevnejsiho</a>
 <div class="row">
     @foreach (var item in Model.saleCollection.collections)
     {
@@ -11,14 +14,17 @@
             <div class="col-md-12 col-xs-12 col-sm-12 containerItem">
                 <div>
                     <h3>
-                        <a asp-controller="Catalog" asp-action="Item" asp-route-id="@item.Id" style="width: 100%;">@item.Name</a>
+                        <a asp-controller="Item" asp-action="Item" asp-route-id="@item.Id" style="width: 100%;">@item.Name</a>
                     </h3>
                 </div>
 
-                <div>
-                    <a asp-controller="Catalog" asp-action="Item" asp-route-id="@item.Id">
+                <div class="test-container">
+                    <a asp-controller="Item" asp-action="Item" asp-route-id="@item.Id">
                         <img src="@item.Image" alt="" class="imageCatalog">
                     </a>
+                    <div class="test-right">
+                        -@item.PercentSale%
+                    </div>
                 </div>
                 <div>
                     <s>@item.OriginPrice,-</s>
@@ -30,7 +36,8 @@
             </div>
         </div>
     }
-</div>
+</div>   
 
-@*@item.PercentSale%*@
+<div id="burst-12">-40%</div>
+    @*@item.PercentSale%*@
 

@@ -1,6 +1,7 @@
 ﻿using SlevaDog.Models.CatalogViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace SlevoDog.Models.CatalogViewModels
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [DataType(DataType.Currency)]
         public decimal PriceAfterSale { get; set; }
         public decimal AveragePrice { get; set; }
         public decimal OriginPrice { get; set; }

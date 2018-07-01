@@ -17,9 +17,23 @@ namespace SlevoDog.Controllers
             _catalogService = catalogService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder)
         {
-            var test = _catalogService.LoadAll();
+            if (String.IsNullOrEmpty(sortOrder))
+            {
+                ViewData["PriceSortParm"] = String.IsNullOrEmpty(sortOrder) ? "price_desc" : "";
+                ViewData["NewSortParm"] = String.IsNullOrEmpty(sortOrder) ? "new_desc" : "";
+                ViewData["SaleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "sale_desc" : "";
+            }
+            else
+            {
+                ViewData["PriceSortParm"] = "price_desc" ;
+                ViewData["NewSortParm"] =  "new_desc";
+                ViewData["SaleSortParm"] = "sale_desc";
+            }
+
+
+            var test = _catalogService.LoadAll(sortOrder);
 
             Sale sale = new Sale();
 
@@ -41,21 +55,11 @@ namespace SlevoDog.Controllers
             return View(sale);
         }
 
-        public IActionResult Item(int? id)
+        public IActionResult Filter(string sortOrder)
         {
-            var test1 = id != null ? _catalogService.LoadById(id.Value) : throw new Exception(nameof(id));
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-            Sale saleItem = new Sale
-            {
-                Name = test1.Name,
-                PriceAfterSale = test1.PriceAfterSale,
-                OriginPrice = test1.OriginPrice,
-                Image = test1.Image,
-                ValidFrom = test1.ValidFrom,
-                LinkFirm = test1.LinkFirm,
-                Description = test1.Description
-            };
-            return View(saleItem);
+            return View("Index");
         }
     }
 }

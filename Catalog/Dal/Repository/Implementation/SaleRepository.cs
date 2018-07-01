@@ -26,14 +26,15 @@ namespace Catalog.Dal.Repository.Implementation
             }
             _options = options.Value;
         }
-        public List<Sale> LoadAll()
+
+        public IEnumerable<Sale> LoadAll()
         {
-            List<Sale> sale = new List<Sale>();
+            IEnumerable<Sale> sale = new List<Sale>();
             string sql = @"Select * from Sale WHERE bDisabled = 0";
 
             using (var connection = new SqlConnection(_options.connectionString))
             {
-                sale = connection.Query<Sale>(sql).ToList();
+                sale = connection.Query<Sale>(sql);
             }
             return sale;
         }
