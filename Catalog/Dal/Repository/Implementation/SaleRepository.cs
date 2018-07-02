@@ -42,12 +42,28 @@ namespace Catalog.Dal.Repository.Implementation
         public Sale LoadById(int id)
         {
             Sale sale = new Sale();
-            string sql = @"SELECT * FROM Sale WHERE bDisabled = 0 AND Id = @Id";
+
+            string sql = @"SELECT * FROM Sale
+                        LEFT JOIN Comments 
+                        ON Sale.Id = Comments.FkSale
+                        AND Comments.Disabled = 0
+                        WHERE Sale.bDisabled = 0 AND Sale.Id = @Id";
 
             using (var connection = new SqlConnection(_options.connectionString))
             {
-                sale = connection.Query<Sale>(sql, new { Id = id }).FirstOrDefault();
+                sale = connection.Query<Sale, Comments, Sale>(
+                    sql,
+                    (saleQuery, comments) =>
+                    {
+                        saleQuery.comments = comments;
+                        return saleQuery;
+                    }, new { Id = id }).FirstOrDefault();
             }
+
+            //using (var connection = new SqlConnection(_options.connectionString))
+            //{
+            //    sale = connection.Query<Sale>(sql, new { Id = id }).FirstOrDefault();
+            //}
             return sale;
         }
     }

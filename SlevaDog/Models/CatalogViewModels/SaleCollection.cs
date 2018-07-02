@@ -8,10 +8,10 @@ namespace SlevaDog.Models.CatalogViewModels
 {
     public class SaleCollection
     {
-        public List<Sale> collections;
+        public List<SaleViewModel> collections;
         public SaleCollection()
         {
-            collections = new List<Sale>();
+            collections = new List<SaleViewModel>();
         }
     }
 }

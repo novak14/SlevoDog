@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SlevoDog.Models.CatalogViewModels
 {
-    public class Sale
+    public class SaleViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,6 +15,8 @@ namespace SlevoDog.Models.CatalogViewModels
         [DataType(DataType.Currency)]
         public decimal PriceAfterSale { get; set; }
         public decimal AveragePrice { get; set; }
+
+        [DataType(DataType.Currency)]
         public decimal OriginPrice { get; set; }
         public string Image { get; set; }
         public DateTime DateInsert { get; set; }
@@ -26,6 +28,7 @@ namespace SlevoDog.Models.CatalogViewModels
         public int PercentSale { get; set; }
 
         public SaleCollection saleCollection { get; } = new SaleCollection();
-        //SaleCollection saleCollection = new SaleCollection()
+
+        public string Text { get; set; }
     }
 }

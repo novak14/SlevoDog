@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SlevoDog.Models.CatalogViewModels
+namespace SlevaDog.Models.CatalogViewModels
 {
-    public class Browse
+    public class SaleItemViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,5 +18,17 @@ namespace SlevoDog.Models.CatalogViewModels
         public DateTime ValidTo { get; set; }
         public string LinkFirm { get; set; }
         public string Description { get; set; }
+        public int PercentSale { get; set; }
+
+        // Comments
+        public int CommentId { get; set; }
+        public int FkSale { get; set; }
+        public DateTime CommentDateInsert { get; set; }
+        public int FkUser { get; set; }
+        public string CommentName { get; set; }
+        public int Rank { get; set; }
+        public string Text { get; set; }
+        public int FkParrentComment { get; set; }
+        public bool Disabled { get; set; }
     }
 }

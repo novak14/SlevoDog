@@ -21,5 +21,7 @@ namespace Catalog.Dal.Entities
         public string Description { get; set; }
         public bool bDisabled { get; set; }
         public int PercentSale { get; set; }
+
+        public Comments comments { get; set; }
     }
 }

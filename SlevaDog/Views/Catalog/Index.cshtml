@@ -1,4 +1,4 @@
-﻿@model Sale
+﻿@model SaleViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -27,9 +27,9 @@
                     </div>
                 </div>
                 <div>
-                    <s>@item.OriginPrice,-</s>
+                    <s>@item.OriginPrice.ToString("C0")</s>
                     <div class="priceSale">
-                        @item.PriceAfterSale Kč
+                        @item.PriceAfterSale.ToString("C0")
                     </div>
                     <a href="@item.LinkFirm" class="btn btn-success btn-lg">Koupit v obchodě</a>
                 </div>

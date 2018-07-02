@@ -35,11 +35,11 @@ namespace SlevoDog.Controllers
 
             var test = _catalogService.LoadAll(sortOrder);
 
-            Sale sale = new Sale();
+            SaleViewModel sale = new SaleViewModel();
 
             foreach (var item in test)
             {
-                Sale saleItem = new Sale
+                SaleViewModel saleItem = new SaleViewModel
                 {
                     Id = item.Id,
                     Name = item.Name,

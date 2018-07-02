@@ -1,44 +1,60 @@
-﻿@model Sale
+﻿@model SaleViewModel
 
 @{
     ViewData["Title"] = "Item";
 }
 
-<h2>Item</h2>
-<div>
-    <div>
-        @Model.Name
-    </div>
+<br />
+<div class="container" style="background-color: white; border-radius: 10px;">
+    <div class="row">
+        <div class="col-lg-6 col-md-7 col-xs-12 text-center">
+            <img src="@Model.Image" alt="" height="420">
+        </div>
+        <div class="col-lg-6 col-md-5 col-xs-6">
+            <div>
+                <h1>@Model.Name</h1>
+            </div>
 
-    <div>
-        @Model.PriceAfterSale,-
-    </div>
-    <div>
-        @Model.OriginPrice.-
-    </div>
+            <div class="text-left">
+                <p style="font-size: 1.5rem; font-weight: 300;">@Model.Description</p>
+            </div>
 
-    <div>
-        <img src="@Model.Image" alt="" height="420" width="420">
-    </div>
+            <div style="color: lightgray; font-size: 2rem;">
+                <s>@Model.OriginPrice.ToString("C0")</s>
+            </div>
+            <div class="priceSaleItem">
+                @Model.PriceAfterSale.ToString("C0") <span style="font-size: 2rem; color: #abb0bfe6;">(-@Model.PercentSale%)</span>
+            </div>
 
-    <div>
-        @Model.ValidFrom
-    </div>
+            <div>
+                @if (Model.ValidFrom != null)
+                {
+                    <div>
+                        Platí od: @Model.ValidFrom.ToString("d")
+                    </div>
+                }
 
-    <div>
-        @Model.ValidTo
-    </div>
+                @if (Model.ValidTo != null)
+                {
+                    <div>
+                        Platí do: @Model.ValidTo.ToString("d")
+                    </div>
+                }
+            </div>
 
-    <div>
-        <a href="@Model.LinkFirm">link text</a>
-    </div>
-    <div>
-        @Model.Description
-    </div>
-    <div>
-        @Model.PercentSale%
-    </div>
-    <div>
-        @Model.DateInsert
+
+            <div>
+                <a href="@Model.LinkFirm" target="_blank" class="btn btn-success btn-lg" style="background-color: #0fcc0ae6; font-size: 2rem;">Přejít do obchodu</a>
+            </div>
+
+            <div>
+                @Model.Text
+            </div>
+
+
+            <div>
+                Vloženo: @Model.DateInsert.ToString("d")
+            </div>
+        </div>
     </div>
 </div>

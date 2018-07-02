@@ -13,7 +13,7 @@ namespace Catalog.Business.DTOObjects
         public string Image { get; set; }
         public string LinkFirm { get; set; }
 
-        public decimal ProcentSale
+        public decimal PercentSale
         {
             get { return OriginPrice - (PriceAfterSale * 100 / 120); }
         }

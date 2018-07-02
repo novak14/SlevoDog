@@ -21,7 +21,7 @@ namespace SlevaDog.Controllers
         {
             var test1 = id != null ? _catalogService.LoadById(id.Value) : throw new Exception(nameof(id));
 
-            Sale saleItem = new Sale
+            SaleViewModel saleItem = new SaleViewModel
             {
                 Name = test1.Name,
                 PriceAfterSale = test1.PriceAfterSale,
@@ -32,7 +32,8 @@ namespace SlevaDog.Controllers
                 LinkFirm = test1.LinkFirm,
                 Description = test1.Description,
                 PercentSale = test1.PercentSale,
-                DateInsert = test1.DateInsert
+                DateInsert = test1.DateInsert,
+                Text = test1.comments?.Text
             };
             return View(saleItem);
         }
