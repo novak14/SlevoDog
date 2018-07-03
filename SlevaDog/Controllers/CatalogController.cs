@@ -47,7 +47,7 @@ namespace SlevoDog.Controllers
                     OriginPrice = item.OriginPrice,
                     Image = item.Image,
                     LinkFirm = item.LinkFirm,
-                    PercentSale = item.PercentSale
+                    PercentSale = (int)item.PercentSale
                 };
 
                 sale.saleCollection.collections.Add(saleItem);

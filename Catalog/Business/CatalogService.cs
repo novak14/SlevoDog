@@ -2,10 +2,12 @@
 using Catalog.Business.DTOObjects;
 using Catalog.Dal.Entities;
 using Catalog.Dal.Repository.Abstraction;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Catalog.Business
 {
@@ -36,9 +38,31 @@ namespace Catalog.Business
             return fullCatalog.ToList();
         }
 
-        public Sale LoadById(int id)
+        public async Task<Sale> LoadByIdAsync(int id)
         {
-            return _loadCatalog.LoadById(id);
+            var test = await _loadCatalog.LoadByIdAsync(id);
+            return test;
+        }
+
+        public async Task<Sale> LoadEfCoreAsync(int id)
+        {
+            return await _loadCatalog.LoadEfCore(id);
+        }
+
+        public void InsertComment(int Id, string AuthorName, string Text, string IdUser = null)
+        {
+            Comments comments = new Comments
+            {
+                DateInsert = DateTime.Now,
+                Disabled = false,
+                FkSale = Id,
+                Name = AuthorName,
+                Text = Text,
+                Rank = 0,
+                FkUser = IdUser
+            };
+
+            _loadCatalog.InsertComment(comments);
         }
     }
 }

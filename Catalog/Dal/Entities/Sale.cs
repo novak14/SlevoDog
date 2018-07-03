@@ -20,8 +20,8 @@ namespace Catalog.Dal.Entities
         public string LinkFirm { get; set; }
         public string Description { get; set; }
         public bool bDisabled { get; set; }
-        public int PercentSale { get; set; }
+        public decimal PercentSale { get; set; }
 
-        public Comments comments { get; set; }
+        public List<Comments> Comments { get; set; } = new List<Comments>();
     }
 }

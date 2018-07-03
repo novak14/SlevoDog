@@ -5,26 +5,27 @@ using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-
-
+using System.Threading.Tasks;
+using Catalog.Dal.Context;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Dal.Repository.Implementation
 {
     public class SaleRepository : ISaleRepository
     {
         private readonly CatalogOptions _options;
+        private readonly CatalogDbContext _context;
 
-        public SaleRepository(IOptions<CatalogOptions> options)
+        public SaleRepository(IOptions<CatalogOptions> options, CatalogDbContext context)
         {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
             }
             _options = options.Value;
+            _context = context;
         }
 
         public IEnumerable<Sale> LoadAll()
@@ -39,7 +40,7 @@ namespace Catalog.Dal.Repository.Implementation
             return sale;
         }
 
-        public Sale LoadById(int id)
+        public async Task<Sale> LoadByIdAsync(int id)
         {
             Sale sale = new Sale();
 
@@ -51,20 +52,57 @@ namespace Catalog.Dal.Repository.Implementation
 
             using (var connection = new SqlConnection(_options.connectionString))
             {
-                sale = connection.Query<Sale, Comments, Sale>(
+                await connection.OpenAsync();
+                var lookup = new Dictionary<int, Sale>();
+
+                var test = await connection.QueryAsync<Sale, Comments, Sale>(
                     sql,
                     (saleQuery, comments) =>
                     {
-                        saleQuery.comments = comments;
-                        return saleQuery;
-                    }, new { Id = id }).FirstOrDefault();
-            }
+                        Sale saleItem;
+                        if (!lookup.TryGetValue(saleQuery.Id, out saleItem))
+                            lookup.Add(saleQuery.Id, saleItem = saleQuery);
 
-            //using (var connection = new SqlConnection(_options.connectionString))
-            //{
-            //    sale = connection.Query<Sale>(sql, new { Id = id }).FirstOrDefault();
-            //}
+                        if (comments != null)
+                            saleItem.Comments.Add(comments);
+                        return saleQuery;
+                    }, new { Id = id });
+
+                sale = test.FirstOrDefault();
+            }
             return sale;
+        }
+
+        public async Task<Sale> LoadEfCore(int id)
+        {
+            Sale sale = new Sale();
+            sale = await _context.Sale
+                    .Include(comm => comm.Comments)
+                    .Where(a => a.Id == id && !a.bDisabled)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync();
+            return sale;
+        }
+
+        public async void InsertComment(Comments comments)
+        {
+            string sql = @"INSERT INTO Comments(FkSale, DateInsert, FkUser, Name, Rank, Text, FkParrentComment, Disabled) 
+                            VALUES(@FkSale, @DateInsert, @FkUser, @Name, @Rank, @Text, @FkParrentComment, @Disabled);";
+
+            using (var connection = new SqlConnection(_options.connectionString))
+            {
+                var affRows = await connection.ExecuteAsync(sql, new
+                {
+                    FkSale = comments.FkSale,
+                    DateInsert = comments.DateInsert,
+                    FkUser = comments.FkUser,
+                    Name = comments.Name,
+                    Rank = comments.Rank,
+                    Text = comments.Text,
+                    FkParrentComment = comments.FkParrentComment,
+                    Disabled = comments.Disabled
+                });
+            }
         }
     }
 }

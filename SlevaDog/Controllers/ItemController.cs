@@ -1,8 +1,11 @@
 ﻿using Catalog.Business;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SlevoDog.Models;
 using SlevoDog.Models.CatalogViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,15 +14,21 @@ namespace SlevaDog.Controllers
     public class ItemController : Controller
     {
         private readonly CatalogService _catalogService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ItemController(CatalogService catalogService)
+        public ItemController(CatalogService catalogService, UserManager<ApplicationUser> userManager)
         {
             _catalogService = catalogService;
+            _userManager = userManager;
         }
 
-        public IActionResult Item(int? id)
+        public async Task<IActionResult> ItemAsync(int? id)
         {
-            var test1 = id != null ? _catalogService.LoadById(id.Value) : throw new Exception(nameof(id));
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            var test1 = id != null ? await _catalogService.LoadByIdAsync(id.Value) : throw new Exception(nameof(id));
+            stopwatch.Stop();
+            var dapper = stopwatch.Elapsed;
 
             SaleViewModel saleItem = new SaleViewModel
             {
@@ -31,11 +40,24 @@ namespace SlevaDog.Controllers
                 ValidTo = test1.ValidTo,
                 LinkFirm = test1.LinkFirm,
                 Description = test1.Description,
-                PercentSale = test1.PercentSale,
-                DateInsert = test1.DateInsert,
-                Text = test1.comments?.Text
+                PercentSale = (int)test1.PercentSale,
+                DateInsert = test1.DateInsert
+                // Text = test1.Comments?.Text
             };
-            return View(saleItem);
+            return View("Item", saleItem);
+        }
+
+        public async Task<IActionResult> AddComments(SaleViewModel model)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                model.AuthorName = user.UserName;
+                model.IdUser = user.Id;
+            }
+            _catalogService.InsertComment(model.Id, model.AuthorName, model.Text, model.IdUser);
+            return View();
         }
     }
 }

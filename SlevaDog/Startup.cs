@@ -16,6 +16,7 @@ using SlevaDog.Models.AdminViewModels;
 using Admin.Dal.Entities;
 using Catalog.Dal.Entities;
 using Catalog.Business.DTOObjects;
+using Catalog.Dal.Context;
 
 namespace SlevoDog
 {
@@ -46,6 +47,8 @@ namespace SlevoDog
             services.AddModuleCatalog(o => o.connectionString = Configuration.GetSection("ConnectionStrings:SlevoDog.Module.CatalogConnection").Value);
 
             services.AddModuleAdmin(o => o.connectionString = Configuration.GetSection("ConnectionStrings:SlevoDog.Module.CatalogConnection").Value);
+
+            services.AddDbContext<CatalogDbContext>(options => options.UseSqlServer("ConnectionStrings:SlevoDog.Module.CatalogConnection"));
 
             services.AddTransient<IEmailSender, EmailSender>();
 

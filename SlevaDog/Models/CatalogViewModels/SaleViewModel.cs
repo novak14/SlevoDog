@@ -29,6 +29,12 @@ namespace SlevoDog.Models.CatalogViewModels
 
         public SaleCollection saleCollection { get; } = new SaleCollection();
 
+        // Comments
+        public string AuthorName { get; set; }
+        public DateTime DateInsertComment { get; set; }
+        public int RankComment { get; set; }
         public string Text { get; set; }
+
+        public string IdUser { get; set; }
     }
 }

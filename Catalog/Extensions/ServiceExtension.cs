@@ -1,5 +1,6 @@
 ﻿using Catalog.Business;
 using Catalog.Configuration;
+using Catalog.Dal.Context;
 using Catalog.Dal.Repository.Abstraction;
 using Catalog.Dal.Repository.Implementation;
 using System;
@@ -24,12 +25,12 @@ namespace Microsoft.Extensions.DependencyInjection
 
             //string connectionString = @"Server=DESKTOP-LCV6O88\SQLEXPRESS;Database=AlzaLegoDatabase;User Id=sa;Password=master";
             //services.AddDbContext<EFLocalizationDbContext>(options => options.UseSqlServer(connectionString));
-
+            services.AddDbContext<CatalogDbContext>();
 
 
 
             //registruje nastaveni modulu
-             services.Configure(setupAction);
+            services.Configure(setupAction);
 
             //connectionString si vezme sam DbContext z IOptions<>
 
