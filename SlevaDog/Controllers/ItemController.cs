@@ -1,6 +1,7 @@
 ﻿using Catalog.Business;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SlevaDog.Models.CatalogViewModels;
 using SlevoDog.Models;
 using SlevoDog.Models.CatalogViewModels;
 using System;
@@ -32,6 +33,7 @@ namespace SlevaDog.Controllers
 
             SaleViewModel saleItem = new SaleViewModel
             {
+                Id = test1.Id,
                 Name = test1.Name,
                 PriceAfterSale = test1.PriceAfterSale,
                 OriginPrice = test1.OriginPrice,
@@ -41,9 +43,22 @@ namespace SlevaDog.Controllers
                 LinkFirm = test1.LinkFirm,
                 Description = test1.Description,
                 PercentSale = (int)test1.PercentSale,
-                DateInsert = test1.DateInsert
-                // Text = test1.Comments?.Text
+                DateInsert = test1.DateInsert,
             };
+
+            foreach(var item in test1.Comments)
+            {
+                CommentsViewModel commentsViewModel = new CommentsViewModel
+                {
+                    AuthorName = item.Name,
+                    Text = item.Text,
+                    DateInsertComment = item.DateInsert,
+                    RankComment = item.Rank
+                };
+                saleItem.Comments.Add(commentsViewModel);
+
+            }
+
             return View("Item", saleItem);
         }
 
@@ -56,8 +71,8 @@ namespace SlevaDog.Controllers
                 model.AuthorName = user.UserName;
                 model.IdUser = user.Id;
             }
-            _catalogService.InsertComment(model.Id, model.AuthorName, model.Text, model.IdUser);
-            return View();
+            _catalogService.InsertComment(model.Id, model.AuthorName, model.Text);
+            return await ItemAsync(model.Id);
         }
     }
 }

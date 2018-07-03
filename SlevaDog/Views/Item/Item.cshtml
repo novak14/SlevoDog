@@ -56,23 +56,53 @@
             <div>
                 Vloženo: @Model.DateInsert.ToString("d")
             </div>
+
+            @foreach(var item in Model.Comments)
+            {
+            <div>
+                @item.AuthorName
+                @item.DateInsertComment
+                @item.RankComment
+                @item.Text
+            </div>
+            }
         </div>
     </div>
 
     <h1>Add comment</h1>
-    <form asp-controller="Item" asp-action="AddComments" method="post">
+    <form asp-controller="Item" asp-action="AddComments" asp-route-id="@Model.Id" method="post">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="AuthorName"></label>
-            <input asp-for="AuthorName" class="form-control" />
+            <input asp-for="AuthorName" id="AuthorName" class="form-control" />
             <span asp-validation-for="AuthorName" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Text"></label>
             <input asp-for="Text" class="form-control" />
-            <span asp-validation-for="Text" class="text-danger"></span>
+            <span asp-validation-for="Text" id="NewComment" class="text-danger"></span>
         </div>
-        <button type="submit" value="Submit" class="btn btn-success">Odeslat</button>
+        <button id="PostNewComment" value="Submit" class="btn btn-success">Odeslat</button>
 
     </form>
 </div>
+
+<script type="text/javascript">
+    $("#PostNewComment").click(function () {
+        console.log("Jsem tu")
+        var NewModel = {
+            AuthorName: $("#AuthorName").val(),
+            Id: @Model.Id,
+            comment: $("#NewComment").val()
+}
+        $.ajax({
+            type: "POST",
+            url: "/Item/AddComments",
+            data: JSON.stringify(NewModel),
+            contentType: "application/json",
+            success: function (data) {
+                window.location.reload();
+            }
+        });
+    });
+</script>

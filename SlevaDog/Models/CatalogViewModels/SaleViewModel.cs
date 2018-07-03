@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SlevoDog.Models.CatalogViewModels
 {
-    public class SaleViewModel
+    public class SaleViewModel : CommentsViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -30,10 +30,7 @@ namespace SlevoDog.Models.CatalogViewModels
         public SaleCollection saleCollection { get; } = new SaleCollection();
 
         // Comments
-        public string AuthorName { get; set; }
-        public DateTime DateInsertComment { get; set; }
-        public int RankComment { get; set; }
-        public string Text { get; set; }
+        public List<CommentsViewModel> Comments { get; set; } = new List<CommentsViewModel>();
 
         public string IdUser { get; set; }
     }

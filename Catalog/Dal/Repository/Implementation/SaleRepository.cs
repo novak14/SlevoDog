@@ -84,24 +84,32 @@ namespace Catalog.Dal.Repository.Implementation
             return sale;
         }
 
-        public async void InsertComment(Comments comments)
+        public void InsertComment(Comments comments)
         {
             string sql = @"INSERT INTO Comments(FkSale, DateInsert, FkUser, Name, Rank, Text, FkParrentComment, Disabled) 
                             VALUES(@FkSale, @DateInsert, @FkUser, @Name, @Rank, @Text, @FkParrentComment, @Disabled);";
-
-            using (var connection = new SqlConnection(_options.connectionString))
+            try
             {
-                var affRows = await connection.ExecuteAsync(sql, new
+
+
+                using (var connection = new SqlConnection(_options.connectionString))
                 {
-                    FkSale = comments.FkSale,
-                    DateInsert = comments.DateInsert,
-                    FkUser = comments.FkUser,
-                    Name = comments.Name,
-                    Rank = comments.Rank,
-                    Text = comments.Text,
-                    FkParrentComment = comments.FkParrentComment,
-                    Disabled = comments.Disabled
-                });
+                    var affRows = connection.Execute(sql, new
+                    {
+                        FkSale = comments.FkSale,
+                        DateInsert = comments.DateInsert,
+                        FkUser = comments.FkUser,
+                        Name = comments.Name,
+                        Rank = comments.Rank,
+                        Text = comments.Text,
+                        FkParrentComment = comments.FkParrentComment,
+                        Disabled = comments.Disabled
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                var ts = e;
             }
         }
     }
